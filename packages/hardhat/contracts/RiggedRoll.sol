@@ -13,6 +13,7 @@ contract RiggedRoll is Ownable {
     }
 
     // Withdraw function to transfer Ether from this contract to a specified address.
+    // Locked with onlyOwner so that only the owner can withdraw funds.
     function withdraw(address payable _to, uint256 amount) external onlyOwner {
         require(address(this).balance >= amount, "Insufficient balance");
         (bool sent, ) = _to.call{ value: amount }("");
