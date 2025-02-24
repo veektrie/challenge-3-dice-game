@@ -33,10 +33,10 @@ contract RiggedRoll is Ownable {
         uint256 roll = uint256(hash) % 16;
         console.log("Predicted roll:", roll);
 
-        // If the predicted roll is not a winning one (winning if roll <= 5), do not call rollTheDice().
+        // If the predicted roll is not a winning one (winning if roll <= 5), revert the transaction.
         if (roll > 5) {
             console.log("Roll not favorable. Aborting riggedRoll.");
-            return;
+            revert("Roll not favorable");
         }
 
         // Call rollTheDice with the required minimum value of 0.002 ETH.
